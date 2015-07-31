@@ -18,8 +18,8 @@
 # Configure Memcached.
 - name: Copy Memcached configuration.
   template:
-    src: memcached.conf.j2
-    dest: /etc/memcached.conf
+    src: memcached-{{ ansible_os_family }}.conf.j2
+    dest: "{{ memcached_config_file }}"
     owner: root
     group: root
     mode: 0644
