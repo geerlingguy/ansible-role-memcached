@@ -30,6 +30,10 @@ Memcached limits. The maximum amount of RAM `memcached` will consume (64MB is th
 
 The location of the memcached log file.
 
+    memcached_log_verbosity: ""
+
+Normally memcached does not log anything. Change to "-v" to enable logging or to "-vv" for debug logging.
+
 ## Dependencies
 
 None.
