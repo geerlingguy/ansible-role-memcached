@@ -7,12 +7,21 @@ An Ansible Role that installs Memcached on RedHat/CentOS or Debian/Ubuntu Linux.
 ## Requirements
 
 None.
+## Installation
+Role support installation in both versions of packages: `.rpm` and `.deb` .
+To install Memcached from package manager (yum or apt) modify variable:
+
+    memcached_use_pkg_mgr: true
+
+If variable is set to false ansible role will download `.rpm` or `.deb` package from given url and install from it.
+
+    memcached_pkg_src_url:
 
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    memcached_user: memcache
+    memcached_user: memcached
 
 The user under which the Memcached daemon will run.
 
@@ -33,6 +42,10 @@ The location of the memcached log file.
     memcached_log_verbosity: ""
 
 Normally memcached does not log anything. Change to "-v" to enable logging or to "-vv" for debug logging.
+
+
+## Optional
+- run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start.
 
 ## Dependencies
 

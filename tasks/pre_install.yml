@@ -1,0 +1,18 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Setup group
+  group: name="{{ memcached_group }}" system=yes
+
+- name: Setup user
+  user: name="{{ memcached_user }}" system=yes group="{{ memcached_group }}"
+
+- name: Create download directory
+  file:
+    path="{{ download_tmp_dir }}"
+    state=directory
+    owner="{{ memcached_user }}"
+    group="{{ memcached_group }}"
+    mode="u+rwX,g+rX,o-rwx"
+    recurse=yes
+  when: not memcached_use_pkg_mgr

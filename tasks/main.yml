@@ -3,27 +3,17 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Define memcached_user.
-  set_fact:
-    memcached_user: "{{ __memcached_user }}"
-  when: memcached_user is not defined
+- include: stop.yml
+  when: run_mode == 'Stop'
 
-# Setup/install tasks.
-- include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- include: install.yml
+  when: run_mode == 'Install' or run_mode == 'Deploy'
 
-- include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+- include: configure.yml
+  when: run_mode == 'Configure' or run_mode == 'Deploy'
 
-# Configure Memcached.
-- name: Copy Memcached configuration.
-  template:
-    src: memcached-{{ ansible_os_family }}.conf.j2
-    dest: "{{ memcached_config_file }}"
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart memcached
+- include: start.yml
+  when: run_mode == 'Start' or run_mode == 'Deploy'
 
-- name: Ensure Memcached is started and set to run on startup.
-  service: name=memcached state=started enabled=yes
+- include: status.yml
+  when: run_mode == 'Status' or run_mode == 'Deploy'

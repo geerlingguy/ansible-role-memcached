@@ -7,3 +7,23 @@ memcached_connections: 1024
 
 memcached_log_file: /var/log/memcached.log
 memcached_log_verbosity: ""
+
+memcached_versions:
+  RedHat: 1.4.15-9.el7
+  Debian: 1.4.5-1+deb6u1
+
+memcached_version: "{{ memcached_versions[ansible_os_family] }}"
+memcached_use_pkg_mgr: false
+
+memcached_pkg_src_urls:
+  RedHat: http://195.220.108.108/linux/centos/7.2.1511/os/x86_64/Packages
+  Debian: http://security.debian.org/debian-security/pool/updates/main/m/memcached
+
+memcached_pkg_src_url: "{{ memcached_pkg_src_urls[ansible_os_family] }}"
+
+download_tmp_dir: /tmp
+
+memcached_user: "memcached"
+memcached_group: "memcached"
+
+run_mode: Deploy
