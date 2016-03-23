@@ -19,8 +19,8 @@
     mode=0640
   when: not memcached_use_pkg_mgr
 
-- name: Install Memcached.
-  yum: name="{{download_tmp_dir}}"/memcached-{{memcached_version}}.x86_64.rpm state=present
+- name: Install Memcached
+  yum: name="{{download_tmp_dir}}/memcached-{{memcached_version}}.x86_64.rpm" state=present
   when: not memcached_use_pkg_mgr
 
 - name: Install Memcached.

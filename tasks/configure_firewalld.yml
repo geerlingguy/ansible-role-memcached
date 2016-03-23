@@ -27,13 +27,13 @@
 - name: Allow ports
   command: iptables -A INPUT -p tcp -s {{item[0]}} --dport {{item[1].item}} -m comment --comment "Allow_tcp_{{item[1].item}}" -j ACCEPT
   with_nested:
-    - memcached_iptables_nodes
-    - check_allow_tcp.results
+    - "{{ memcached_iptables_nodes }}"
+    - "{{ check_allow_tcp.results }}"
   when: (firewalld is not defined or firewalld.rc != 0) and item[1].rc != 0
 
 - name: Drop port
   command: iptables -A INPUT -p tcp --destination-port {{item.item}} -m comment --comment "Drop_tcp_{{item.item}}" -j DROP
-  with_items: check_allow_tcp.results
+  with_items: "{{ check_allow_tcp.results }}"
   notify:
     - save iptables
   when: (firewalld is not defined or firewalld.rc != 0) and item.rc != 0
