@@ -46,6 +46,7 @@ Normally memcached does not log anything. Change to "-v" to enable logging or to
 
 ## Optional
 - run_mode: One of Deploy, Stop, Install, Start, or Use. The default is Deploy which will do Install, Configure, then Start.
+- memcached_iptables_nodes: List of ip addresss that will have access do Memcached.
 
 ## Dependencies
 

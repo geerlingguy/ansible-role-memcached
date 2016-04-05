@@ -27,3 +27,5 @@ memcached_user: "memcached"
 memcached_group: "memcached"
 
 run_mode: Deploy
+
+memcached_iptables_nodes: []

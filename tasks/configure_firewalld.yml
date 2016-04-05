@@ -1,0 +1,39 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Check if firewalld
+  command: /usr/bin/systemctl status firewalld
+  ignore_errors: yes
+  register: firewalld
+
+- name: Set firewalld rule
+  firewalld: port="{{ item| int }}/tcp" permanent=true state=enabled
+  with_items:
+    - "{{ memcached_port }}"
+  notify:
+    - restart firewalld
+  when: firewalld is defined and firewalld.rc == 0
+
+- name: Check if ports are allowed
+  shell: iptables -L | grep -q "Allow_tcp_{{item}}"
+  with_items:
+    -  "{{ memcached_port }}"
+  register: check_allow_tcp
+  ignore_errors: yes
+  changed_when: no
+  always_run: yes
+  when: firewalld is not defined or firewalld.rc != 0
+
+- name: Allow ports
+  command: iptables -A INPUT -p tcp -s {{item[0]}} --dport {{item[1].item}} -m comment --comment "Allow_tcp_{{item[1].item}}" -j ACCEPT
+  with_nested:
+    - memcached_iptables_nodes
+    - check_allow_tcp.results
+  when: (firewalld is not defined or firewalld.rc != 0) and item[1].rc != 0
+
+- name: Drop port
+  command: iptables -A INPUT -p tcp --destination-port {{item.item}} -m comment --comment "Drop_tcp_{{item.item}}" -j DROP
+  with_items: check_allow_tcp.results
+  notify:
+    - save iptables
+  when: (firewalld is not defined or firewalld.rc != 0) and item.rc != 0

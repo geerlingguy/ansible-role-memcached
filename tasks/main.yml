@@ -17,3 +17,6 @@
 
 - include: status.yml
   when: run_mode == 'Status' or run_mode == 'Deploy'
+
+- include:  configure_firewalld.yml
+  when: run_mode == 'Status' or run_mode == 'Deploy'
