@@ -1,4 +1,9 @@
 ---
+memcached_user: memcache
+memcached_use_socket: false
+
+memcached_socket_permissions: 0755
+
 memcached_port: 11211
 memcached_listen_ip: 127.0.0.1
 
