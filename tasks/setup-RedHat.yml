@@ -1,3 +1,12 @@
 ---
 - name: Install Memcached.
   yum: name=memcached state=installed
+
+- name: Allow non-standard memcached ports with SELinux (tcp).
+  seport: ports="{{memcached_port}}" proto=tcp setype=memcache_port_t state=present
+  when: memcached_port != 11211 and ansible_version.string|version_compare('2.0', '>=')
+
+- name: Allow non-standard memcached ports with SELinux (udp).
+  seport: ports="{{memcached_port}}" proto=udp setype=memcache_port_t state=present
+  when: memcached_port != 11211 and ansible_version.string|version_compare('2.0', '>=')
+
