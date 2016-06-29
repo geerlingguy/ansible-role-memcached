@@ -11,8 +11,5 @@
   file:
     path="{{ download_tmp_dir }}"
     state=directory
-    owner="{{ memcached_user }}"
-    group="{{ memcached_group }}"
-    mode="u+rwX,g+rX,o-rwx"
     recurse=yes
   when: not memcached_use_pkg_mgr
