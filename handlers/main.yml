@@ -1,3 +1,9 @@
 ---
 - name: restart memcached
   service: name=memcached state=restarted
+
+- name: restart firewalld
+  service: name=firewalld state=restarted enabled=yes
+
+- name: save iptables
+  command: /sbin/iptables-save

@@ -1,0 +1,33 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+- name: Fetch package
+  get_url: url={{memcached_pkg_src_url}}/memcached_{{ memcached_version }}_amd64.deb
+           dest={{download_tmp_dir}}/memcached_{{ memcached_version }}_amd64.deb
+  register: get_url_result
+  until: get_url_result.state == 'file'
+  retries: 5
+  delay: 1
+  when: not memcached_use_pkg_mgr
+
+- name: Set owner and group for memcached package
+  file:
+    path="{{download_tmp_dir}}/memcached_{{memcached_version}}_amd64.deb"
+    state=file
+    owner={{memcached_user}}
+    group={{memcached_group}}
+    mode=0640
+  when: not memcached_use_pkg_mgr
+
+- name: Install Memcached
+  command: dpkg --skip-same-version -i {{ download_tmp_dir }}/memcached_{{ memcached_version }}_amd64.deb
+  register: dpkg_result
+  changed_when: "dpkg_result.stdout.startswith('Selecting')"
+  when: not memcached_use_pkg_mgr
+
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+  when: memcached_use_pkg_mgr
+
+- name: Install Memcached.
+  apt: name=memcached state=installed
+  when: memcached_use_pkg_mgr

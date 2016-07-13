@@ -1,0 +1,4 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+- name: Stop memcached
+  service: name=memcached state=stopped

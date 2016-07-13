@@ -1,0 +1,10 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+- include: pre_install.yml
+
+# Setup/install tasks.
+- include: install_redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: install_debian.yml
+  when: ansible_os_family == 'Debian'

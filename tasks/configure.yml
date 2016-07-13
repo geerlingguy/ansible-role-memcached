@@ -1,0 +1,12 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+# Configure Memcached.
+
+- name: Copy Memcached configuration.
+  template:
+    src: memcached-{{ ansible_os_family }}.conf.j2
+    dest: "{{ memcached_config_file }}"
+    owner: "{{ memcached_user }}"
+    group: "{{ memcached_group }}"
+    mode: 0644
+  notify: restart memcached
