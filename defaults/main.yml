@@ -12,3 +12,6 @@ memcached_lockdown: no
 memcached_error_on_exhausted: no
 memcached_maximize_core_filelimit: no
 
+memcached_custom_logs: no
+
+

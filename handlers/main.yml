@@ -2,3 +2,12 @@
 - name: restart memcached
   service: name=memcached state=restarted
   when: not memcached_install.changed
+
+- name: reload systemd
+  systemd: daemon_reload=yes
+  when: memcached_custom_logs|bool = True
+
+- name: reload rsyslog
+  service: name=rsyslog state=reloaded
+  when: memcached_custom_logs|bool = True
+
