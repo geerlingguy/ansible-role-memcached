@@ -8,4 +8,4 @@
   systemd: daemon_reload=yes name=memcached
 
 - name: reload rsyslog
-  service: name=rsyslog state=reloaded
+  service: name=rsyslog state=restarted
