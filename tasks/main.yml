@@ -43,7 +43,7 @@
     state: touch
     owner: syslog
     group: adm
-  when: {{ memcached_custom_logs|bool == True }}
+  when: memcached_custom_logs|bool == True
 
 - name: Copy ench rsyslog def for Debian
   template:
