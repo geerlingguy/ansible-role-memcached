@@ -38,7 +38,7 @@
 
 - name: Logfile exists
   file:
-    src: "{{ memcached_log_file }}"
+    path: "{{ memcached_log_file }}"
     state: present
     owner: syslog
     group: adm
