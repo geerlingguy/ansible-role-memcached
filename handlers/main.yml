@@ -5,7 +5,7 @@
   when: not memcached_install.changed
 
 - name: reload systemd
-  systemd: daemon_reload=yes
+  systemd: daemon_reload=yes name=memcached
 
 - name: reload rsyslog
   service: name=rsyslog state=reloaded
