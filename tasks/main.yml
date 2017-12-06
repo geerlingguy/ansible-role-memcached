@@ -39,7 +39,7 @@
 - name: Logfile exists
   file:
     path: "{{ memcached_log_file }}"
-    state: file
+    state: touch
     owner: syslog
     group: adm
 
