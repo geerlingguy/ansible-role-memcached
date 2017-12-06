@@ -1,0 +1,4 @@
+if ( $programname startswith "memcached" ) then {
+    action(type="omfile" file="{{ memcached_log_file }}" flushOnTXEnd="off")
+    stop
+}

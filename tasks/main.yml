@@ -27,5 +27,42 @@
     mode: 0644
   notify: restart memcached
 
+- name: Copy ench systemd unit for Debian
+  template:
+    src: memcached-{{ ansible_os_family }}-systemd.service.j2
+    dest: "/lib/systemd/system/memcached.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload systemd
+  when: memcached_custom_logs|bool == True
+
+- name: Logfile exists
+  file:
+    path: "{{ memcached_log_file }}"
+    state: touch
+    owner: syslog
+    group: adm
+  when: memcached_custom_logs|bool == True
+
+- name: Copy ench rsyslog def for Debian
+  template:
+    src: memcached-{{ ansible_os_family }}-rsyslog.conf.j2
+    dest: "/etc/rsyslog.d/20-memcached.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload rsyslog
+  when: memcached_custom_logs|bool == True
+
+- name: Copy ench logrotate def for Debian
+  template:
+    src: memcached-{{ ansible_os_family }}-logrotate.conf.j2
+    dest: "/etc/logrotate.d/memcached"
+    owner: root
+    group: root
+    mode: 0644
+  when: memcached_custom_logs|bool == True
+
 - name: Ensure Memcached is started and set to run on startup.
   service: name=memcached state=started enabled=yes

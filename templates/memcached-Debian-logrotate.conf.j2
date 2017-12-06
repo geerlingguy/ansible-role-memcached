@@ -1,0 +1,9 @@
+{{ memcached_log_file }} {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 syslog adm
+}

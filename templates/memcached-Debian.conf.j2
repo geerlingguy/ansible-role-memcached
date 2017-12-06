@@ -10,7 +10,6 @@
 -d
 
 # Log memcached's output to /var/log/memcached
-logfile {{ memcached_log_file }}
 {{ memcached_log_verbosity }}
 
 # Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
@@ -34,10 +33,22 @@ logfile {{ memcached_log_file }}
 -c {{ memcached_connections }}
 
 # Lock down all paged memory. Consult with the README and homepage before you do this
+{% if memcached_lockdown %}
+-k
+{% else %}
 # -k
+{% endif %}
 
 # Return error when memory is exhausted (rather than removing items)
+{% if memcached_error_on_exhausted  %}
+-M
+{% else %}
 # -M
+{% endif %}
 
 # Maximize core file limit
+{% if memcached_maximize_core_filelimit %}
+-r
+{% else %}
 # -r
+{% endif %}
