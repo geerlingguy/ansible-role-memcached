@@ -36,6 +36,13 @@
     mode: 0644
   notify: reload systemd
 
+- name: Logfile exists
+  file:
+    src: {{ memcached_log_file }}
+    state: present
+    owner: syslog
+    group: adm
+
 - name: Copy ench rsyslog def for Debian
   template:
     src: memcached-{{ ansible_os_family }}-rsyslog.conf.j2
