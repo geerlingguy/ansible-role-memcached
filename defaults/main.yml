@@ -7,3 +7,8 @@ memcached_connections: 1024
 
 memcached_log_file: /var/log/memcached.log
 memcached_log_verbosity: ""
+
+memcached_lockdown: no
+memcached_error_on_exhausted: no
+memcached_maximize_core_filelimit: no
+
