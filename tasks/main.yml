@@ -35,6 +35,7 @@
     group: root
     mode: 0644
   notify: reload systemd
+  when: memcached_custom_logs|bool == True
 
 - name: Logfile exists
   file:
@@ -42,6 +43,7 @@
     state: touch
     owner: syslog
     group: adm
+  when: {{ memcached_custom_logs|bool == True }}
 
 - name: Copy ench rsyslog def for Debian
   template:
@@ -51,6 +53,7 @@
     group: root
     mode: 0644
   notify: reload rsyslog
+  when: memcached_custom_logs|bool == True
 
 - name: Copy ench logrotate def for Debian
   template:
@@ -59,6 +62,7 @@
     owner: root
     group: root
     mode: 0644
+  when: memcached_custom_logs|bool == True
 
 - name: Ensure Memcached is started and set to run on startup.
   service: name=memcached state=started enabled=yes
