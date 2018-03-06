@@ -2,6 +2,8 @@
 memcached_port: 11211
 memcached_listen_ip: 127.0.0.1
 
+memcached_udp_port: 0
+
 memcached_memory_limit: 64
 memcached_connections: 1024
 

@@ -21,6 +21,10 @@ The user under which the Memcached daemon will run.
 
 The port and IP address (127.0.0.1 for localhost) on which Memcached will listen for requests.
 
+    memcached_udp_port: 0
+
+The UDP port to listen on, the default is usually 11211 but this role sets it to 0 which is off.
+
     memcached_memory_limit: 64
     memcached_connections: 1024
 

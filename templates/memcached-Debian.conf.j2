@@ -41,3 +41,6 @@ logfile {{ memcached_log_file }}
 
 # Maximize core file limit
 # -r
+
+# The UDP port to listen on, the default is usually 11211, 0 is off
+-U {{ memcached_udp_port }}
