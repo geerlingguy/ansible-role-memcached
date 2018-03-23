@@ -17,6 +17,13 @@
   package: name=memcached state=installed
   register: memcached_install
 
+- name: Create Memcached log file.
+  file:
+    path: "{{memcached_log_file}}"
+    mode: 0600
+    owner: "{{memcached_user}}"
+    state: touch
+
 # Configure Memcached.
 - name: Copy Memcached configuration.
   template:
