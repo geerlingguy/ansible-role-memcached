@@ -32,7 +32,18 @@ The location of the memcached log file.
 
     memcached_log_verbosity: ""
 
+The location of the PID file.
+
+    memcached_pid: /var/run/memcached/memcached.pid
+
 Normally memcached does not log anything. Change to "-v" to enable logging or to "-vv" for debug logging.
+
+## Listening on a socket
+
+By default Memcached listens on an IP and port, however this behaviour can be overwritten by using sockets which allow local services to communicate without a TCP/IP overhead. N.B. this disables network support.
+
+    memcached_socket: /var/run/memcached/memcached.sock
+    memcached_socket_mask: 700
 
 ## Dependencies
 

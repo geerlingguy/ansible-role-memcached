@@ -41,3 +41,13 @@ logfile {{ memcached_log_file }}
 
 # Maximize core file limit
 # -r
+
+# save PID in <file>, only used with -d option
+-P {{ memcached_pid }}
+
+{% if memcached_socket is defined %}
+# UNIX socket to listen on (disables network support)
+-s {{ memcached_socket }}
+# access mask for UNIX socket, in octal
+-a {{ memcached_socket_mask }}
+{% endif %}
