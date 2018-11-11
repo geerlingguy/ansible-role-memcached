@@ -41,3 +41,6 @@ logfile {{ memcached_log_file }}
 
 # Maximize core file limit
 # -r
+
+# Override the default size of each slab page. The default size is 1mb.
+-I {{ memcached_slab_size }}
