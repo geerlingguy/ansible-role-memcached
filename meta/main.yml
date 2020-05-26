@@ -2,6 +2,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: memcached
   author: geerlingguy
   description: Memcached for Linux
   company: "Midwestern Mac, LLC"
