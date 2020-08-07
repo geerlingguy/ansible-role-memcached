@@ -1,4 +1,7 @@
 ---
+# Used for RHEL/CentOS/Fedora only. Allows the use of different repos.
+memcached_enablerepo: ""
+
 memcached_port: 11211
 memcached_listen_ip: 127.0.0.1
 

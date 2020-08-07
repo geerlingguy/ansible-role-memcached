@@ -12,6 +12,10 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    memcached_enablerepo: ""
+
+(RedHat/CentOS only) If you have enabled any additional repositories (might I suggest geerlingguy.repo-remi), those repositories can be listed under this variable (e.g. `remi`). This can be handy, as an example, if you want to install the latest version of Memcached from Remi's repository.
+
     memcached_user: memcache
 
 The user under which the Memcached daemon will run.

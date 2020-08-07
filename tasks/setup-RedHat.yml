@@ -1,0 +1,7 @@
+---
+- name: Ensure Memcached is installed.
+  package:
+    name: memcached
+    state: present
+    enablerepo: "{{ memcached_enablerepo | default(omit, true) }}"
+  register: memcached_install
