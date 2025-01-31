@@ -1,6 +1,6 @@
 # Ansible Role: Memcached
 
-[![CI](https://github.com/geerlingguy/ansible-role-memcached/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-memcached/actions?query=workflow%3ACI)
+[![CI](https://github.com/geerlingguy/ansible-role-memcached/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-memcached/actions/workflows/ci.yml)
 
 An Ansible Role that installs Memcached on RedHat/CentOS or Debian/Ubuntu Linux.
 
